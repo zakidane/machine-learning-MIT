@@ -1,1 +1,7 @@
 # machine-learning-MIT
+
+The lab assignments are part of MIT 6.034 Artificial Intelligence, Fall 2010 course. The python assignments can be tested by running python tester.py. Some code from the following link was referenced to complete these labs: https://github.com/wangjohn/mit-courses 
+
+1. Lab0 - Basic python skill-tests
+2. Lab1 - Rule-Based Systems: Backward chaining and forward chaining 
+3. Lab2: Hill-Climbing, Beam, A* and Best-Frist Searches implementation
