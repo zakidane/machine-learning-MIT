@@ -57,7 +57,7 @@ def bfs(graph, start, goal):
                 new_path = list(path)
                 new_path.append(k)
                 queue.append(new_path)
-## Once you have completed the breadth-first search,
+# ## Once you have completed the breadth-first search,
 ## this part should be very simple to complete.
 def dfs(graph, start, goal):
     visited = set()
@@ -78,18 +78,80 @@ def dfs(graph, start, goal):
                 new_path.append(k)
                 stack.append(new_path)
 
-
 ## Now we're going to add some heuristics into the search.
 ## Remember that hill-climbing is a modified version of depth-first search.
 ## Search direction should be towards lower heuristic values to the goal.
 def hill_climbing(graph, start, goal):
-    
+    queue = [[start]]
+    while len(queue) > 0 and queue[0][-1] != goal:
+        current_path = queue.pop(0)
+        current_node = current_path[-1]
+        connected = graph.get_connected_nodes(current_node)
+        new_paths = {}
+        for connected_node in connected:
+            distance_to_goal = graph.get_heuristic(connected_node, goal)
+            if connected_node not in current_path:
+                add_to_dictlist(new_paths, distance_to_goal, current_path + [connected_node])
+        paths_for_front = []
+        for path_distance in sorted(new_paths):
+            paths_for_front.extend(new_paths[path_distance])
+        queue = paths_for_front + queue
+        print queue
+    if len(queue) > 0:
+        return queue[0]
+    else:
+        return []
+def add_to_dictlist(dictionary, key, value):
+    if key in dictionary:
+        dictionary[key].append(value)
+    else:
+        dictionary[key] = [value]
 
-## Now we're going to implement beam search, a variation on BFS
+#     visited = set()
+#     stack = []
+#     stack.append([start])
+#     min_path = stack[0]
+#     min_distance = graph.get_heuristic(start, goal)
+#     min_index = 0
+#     while stack:
+#                 #this needs to be modified to find the shortest remaining distance
+#         #can be done by first sorting by heuristic distances
+#         #last one has shortest remaining distance
+#         #order by using .get_heuristic[last node in popped][goal]??
+#         for min_path in stack:
+#             min_node = min_path[-1]
+#             if graph.get_heuristic(min_node, goal) < min_distance:
+#                 min_distance = graph.get_heuristic(node, goal)
+#                 min_index = stack.index(min_path)
+#
+#
+#         stack_length = len(stack)
+#         if stack_length > min_index:
+#             path = stack.pop(min_index)
+#             print(path)
+#             node = path[-1]
+#         else:
+#             break
+#
+#
+#         connected_nodes = graph.get_connected_nodes(node)
+#
+#         if node == goal:
+#             return path
+#
+#         if node not in visited:
+#             visited.add(node)
+#             for k in connected_nodes:
+#                 new_path = list(path)
+#                 new_path.append(k)
+#                 stack.append(new_path)
+#
+#     return []
+# ## Now we're going to implement beam search, a variation on BFS
 ## that caps the amount of memory used to store paths.  Remember,
 ## we maintain only k candidate paths of length n in our agenda at any time.
 ## The k top candidates are to be determined using the
-## graph get_heuristic function, with lower values being better values.
+# ## graph get_heuristic function, with lower values being better values.
 def beam_search(graph, start, goal, beam_width):
     raise NotImplementedError
 
@@ -120,6 +182,6 @@ def is_admissible(graph, goal):
 def is_consistent(graph, goal):
     raise NotImplementedError
 
-HOW_MANY_HOURS_THIS_PSET_TOOK = ''
-WHAT_I_FOUND_INTERESTING = ''
-WHAT_I_FOUND_BORING = ''
+HOW_MANY_HOURS_THIS_PSET_TOOK = '10'
+WHAT_I_FOUND_INTERESTING = 'dfs'
+WHAT_I_FOUND_BORING = 'debugging'
