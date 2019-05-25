@@ -1,0 +1,11 @@
+Information needed:
+
+1. Functions available
+2. Objects
+3. Objective (functions to be completed):
+	focused_evaluate:
+
+	better_evaluate:
+
+	alpha_beta_search:
+
