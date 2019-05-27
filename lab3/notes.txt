@@ -8,4 +8,19 @@ Information needed:
 	better_evaluate:
 
 	alpha_beta_search:
+		1. decide if game is over or depth is 0
+			1.1. If so, retrieve the value of the position
+			1.2. Return that value
+		2. Decide if current player seeks to maximize of minimize the game:
+			2.1. If maximizing, set maxEval = -infinity
+			2.2. Retrieve all the next moves (the child nodes)
+			2.3. For each child do the following: 
+				eval = alpha_beta_search(child, depth-1, alpha, beta...)
+				maxEval = max(maxEval, eval)
+				alpha = max(alpha, eval)
+				if beta <= alpha
+					break
+			2.4. return maxEval
+
+
 

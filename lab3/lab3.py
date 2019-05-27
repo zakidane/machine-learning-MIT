@@ -104,8 +104,21 @@ def alpha_beta_search(board, depth,
                       # for connect_four.
                       get_next_moves_fn=get_all_next_moves,
 		      is_terminal_fn=is_terminal):
-    raise NotImplementedError
-
+    best_val = None
+    for move, new_board in get_next_moves_fn(board):
+        val = -1 * alphabeta_find_board_value(new_board, depth-1, eval_fn, NEG_INFINITY, INFINITY,
+                                            get_next_moves_fn, is_terminal_fn)
+        if best_val == None or val > best_val[0]:
+            best_val = (val, move, new_board)
+    return best_val[1]
+def alphabeta_find_board_value(board, depth, eval_fn, alpha, beta, get_next_moves_fn=get_all_next_moves, is_terminal_fn=is_terminal):
+        if is_terminal_fn(depth, board):
+            return eval_fn(board)
+        for move, new_board in get_next_moves_fn(board):
+            alpha = max(alpha, -alphabeta_find_board_value(new_board, depth-1, eval_fn, -beta, -alpha, get_next_moves_fn, is_terminal_fn))
+            if alpha >= beta:
+                break
+        return alpha
 ## Now you should be able to search twice as deep in the same amount of time.
 ## (Of course, this alpha-beta-player won't work until you've defined
 ## alpha-beta-search.)
