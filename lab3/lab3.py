@@ -207,7 +207,7 @@ def run_test_tree_search(search, board, depth):
 COMPETE = (None)
 
 ## The standard survey questions.
-HOW_MANY_HOURS_THIS_PSET_TOOK = ""
+HOW_MANY_HOURS_THIS_PSET_TOOK = "10"
 WHAT_I_FOUND_INTERESTING = ""
 WHAT_I_FOUND_BORING = ""
 NAME = ""
