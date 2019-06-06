@@ -1,0 +1,15 @@
+Functions To Be Completed: 
+
+Forward Checking
+	Let X be the variable currently being assigned.
+	Let x be the value being assigned to X.
+	Find all the binary constraints that are associated with X.
+	For each constraint:
+		1. Let Y be the variable connected to X by that binary constraint.
+		2. For each variable value y in Y's domain
+		1. If constraint checking fails for X=x and Y=y
+		1. Remove y from Y's domain
+		2. If the domain of Y is reduced down to the empty set, then the entire check fails:
+		return False.
+		5. If all constraints passed declare success, return True
+
